@@ -11,11 +11,16 @@ void Foo()
     Persona persona_local("Geronimo", 20);
     persona_local.Saludar();
 
+    Persona *persona_dinamica = new Persona("AMLO", 100);
+    persona_dinamica->Saludar();
+
     if (true)
     {
         Persona persona_local2("Joaquin", 45);
-        persona_local2.Saludar();
+        persona_local2.HacerReir(rand());
     }
+
+    delete persona_dinamica;
 }
 
 int main()

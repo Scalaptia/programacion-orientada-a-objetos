@@ -14,6 +14,8 @@ public:
     Persona();                                   // Constructor por defecto
     ~Persona();                                  // Destructor
     Persona(const char *el_nombre, int la_edad); // Constructor con parámetros
+
     void HacerReir(int motivo);
     void Saludar();
+    void Liberar();
 };
