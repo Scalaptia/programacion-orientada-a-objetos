@@ -4,12 +4,24 @@
 using std::cout;
 using std::endl;
 
-void UsarPersona(Persona *persona)
+void UsarPersona(Persona &persona)
 {
     cout << "----- Utilizando Persona -----" << endl;
-    persona->Saludar();
-    persona->HacerReir(rand());
+    persona.Saludar();
+    persona.HacerReir(rand());
     cout << "----- Persona utilizada -----" << endl;
+}
+
+void UsarPersona2(const Persona &persona)
+{
+    cout << "---- Usando otra vez a persona " << persona.GetNombre();
+    cout << "----" << endl;
+
+    // persona.SetNombre("Ifigenia");
+    persona.Saludar();
+    // persona.SetEdad(-20);
+    persona.HacerReir(rand());
+    cout << "---- Persona utilizada ----" << endl;
 }
 
 int main()
@@ -23,8 +35,10 @@ int main()
     persona4 = &persona1;
 
     persona1.Saludar();
-    UsarPersona(&persona2);
-    UsarPersona(persona3);
+    UsarPersona(persona2);
+    UsarPersona(*persona3);
+
+    UsarPersona2(persona2);
 
     cout << "Adios..." << endl;
     delete persona3;
