@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
 #include <string>
 #include "./persona.h"
@@ -15,18 +16,20 @@ private:
 
 public:
     CuentaDeCheques(const char *num, Persona &pers, float saldoInicial); // Constructor
-    // ~CuentaDeCheques();                                                  // Destructor
+    // ~CuentaDeCheques();                                               // Destructor
 
+    // Metodos
     void depositar(float cantidad);
     void retirar(float cantidad);
     void transferir(CuentaDeCheques *cuenta, float cantidad);
-    void mostrarEstado();
+    void actualizarFecha();
+    void mostrarEstado() const;
 
-    float getSaldo() { return saldo; };
-    string getNumeroCuenta() { return numeroCuenta; };
-    Persona getPropietario() { return propietario; };
-    string getUltimaTransaccion() { return ultimaTransaccion; };
+    // Getters y setters
+    float getSaldo() const { return saldo; };
+    string getNumeroCuenta() const { return numeroCuenta; };
+    Persona getPropietario() const { return propietario; };
+    string getUltimaTransaccion() const { return ultimaTransaccion; };
 
     void setUltimaTransaccion(const char *ultimaTransaccion);
-    void actualizarFecha();
 };

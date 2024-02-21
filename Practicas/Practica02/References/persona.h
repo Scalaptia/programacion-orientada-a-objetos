@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <string>
 
 class Persona
@@ -16,18 +17,14 @@ public:
     Persona();
     Persona(const char *el_nombre, int la_edad);
     // Destructor
-    //~Persona(); no manejamos memoria dinamica, no es necesario el
-    // destructor
+    //~Persona(); no manejamos memoria dinamica, no es necesario el destructor
     void HacerReir(int motivo) const;
     // Getters y setters
     std::string GetNombre() const;
     void SetNombre(const char *nuevo_nombre);
 
     int GetEdad() const { return edad; };
-    void SetEdad(int nueva_edad)
-    {
-        edad = (nueva_edad > 0) ? nueva_edad : edad;
-    }
+    void SetEdad(int nueva_edad) { edad = (nueva_edad > 0) ? nueva_edad : edad; }
 
     void Saludar() const;
 };

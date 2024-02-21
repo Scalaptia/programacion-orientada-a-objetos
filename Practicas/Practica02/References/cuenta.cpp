@@ -66,7 +66,7 @@ void CuentaDeCheques::transferir(CuentaDeCheques *cuenta, float cantidad)
     }
 };
 
-void CuentaDeCheques::mostrarEstado()
+void CuentaDeCheques::mostrarEstado() const
 {
     cout << "----------------------------------------------" << endl;
     cout << "Número de cuenta: " << numeroCuenta << endl;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 #include "./References/cuenta.h"
 
 using std::cout;
@@ -14,24 +15,35 @@ int main()
     CuentaDeCheques cuenta2("2345678901", propietario2, 100.0f);
 
     // Mostrar estado de cuenta
-    cout << "Estado Inicial" << endl;
+    cout << endl
+         << "Estado Inicial" << endl;
     cuenta.mostrarEstado();
     cuenta2.mostrarEstado();
 
     // Depositar y retirar
-    cuenta.depositar(100.0f);
-    cuenta.retirar(50.0f);
+    std::this_thread::sleep_for(std::chrono::seconds(2)); // Esperar 2 segundos
+    cuenta.depositar(50.0f);
+    cuenta2.retirar(50.0f);
 
     // Mostrar estado de cuenta
-    cout << "Despues de depositar y retirar" << endl;
+    cout << endl
+         << "Despues de depositar y retirar" << endl;
     cuenta.mostrarEstado();
     cuenta2.mostrarEstado();
 
     // Transferir
+    std::this_thread::sleep_for(std::chrono::seconds(2)); // Esperar 2 segundos
     cuenta.transferir(&cuenta2, 25.0f);
 
     // Mostrar estado de cuenta
-    cout << "Despues de transferir" << endl;
+    cout << endl
+         << "Despues de transferir" << endl;
+    cuenta.mostrarEstado();
+    cuenta2.mostrarEstado();
+
+    // Reporte de cuentas
+    cout << endl
+         << "Reporte de cuentas" << endl;
     cuenta.mostrarEstado();
     cuenta2.mostrarEstado();
 
