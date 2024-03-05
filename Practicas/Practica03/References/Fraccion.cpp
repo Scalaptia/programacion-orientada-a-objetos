@@ -25,9 +25,9 @@ Fraccion::Fraccion(string f)
 {
     string f2 = removeSpaces(f);
 
-    int pos = f2.find("/");
-    string num = f2.substr(0, pos);
-    string den = f2.substr(pos + 1, f2.length() - pos);
+    int pos = f2.find("/");                             // Encontrar la posicion de la barra
+    string num = f2.substr(0, pos);                     // Extraer el numerador
+    string den = f2.substr(pos + 1, f2.length() - pos); // Extraer el denominador
 
     this->numerador = stoi(num);
     this->denominador = stoi(den);
@@ -141,7 +141,17 @@ Fraccion operator/(int escalar, Fraccion f)
 // Impresion
 ostream &operator<<(ostream &out, Fraccion f)
 {
-    out << f.numerador << "/" << f.denominador;
+    if (f.numerador > f.denominador)
+    {
+        int entero = f.numerador / f.denominador;
+        int resto = f.numerador % f.denominador;
+
+        resto == 0 ? out << entero : out << entero << " " << resto << "/" << f.denominador;
+    }
+    else
+    {
+        out << f.numerador << "/" << f.denominador;
+    }
 
     return out;
 }

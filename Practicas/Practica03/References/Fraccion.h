@@ -17,7 +17,7 @@ public:
 
     // Constructor
     Fraccion(int numerador = 0, int denominador = 1);
-    Fraccion(string f); // "3 / 4" (sin espacios
+    Fraccion(string f); // "3 / 4" (sin espacios)
 
     // Metodos
     Fraccion sumar(Fraccion f2);
