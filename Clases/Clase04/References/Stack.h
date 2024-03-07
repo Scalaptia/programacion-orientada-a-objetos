@@ -1,11 +1,12 @@
 #pragma once
 
+template <class T>
 class Stack
 {
     // Atributos
     struct nodo
     {
-        int dato = 0;
+        T dato = 0;
         struct nodo *prev = nullptr;
     };
     struct nodo *top = nullptr;
@@ -15,7 +16,9 @@ public:
     ~Stack();
 
     // Metodos
-    void push(int nodo);
-    int pop();
+    void push(T nodo);
+    T pop();
+    T peek() { top == nullptr ? throw "Underflow error..." : return top->dato; };
+    void clear();
     bool isEmpty() { return (top == nullptr); };
 };

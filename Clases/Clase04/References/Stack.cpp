@@ -1,31 +1,50 @@
 #include "Stack.h"
 
-void Stack::push(int dato)
+template <class T>
+void Stack<T>::push(T dato)
 {
     struct nodo *nuevo = new struct nodo;
-    nuevo->dato = dato;
 
+    if (nuevo == nullptr)
+        throw "Memoria insuficiente...";
+
+    nuevo->dato = dato;
     nuevo->prev = top;
     top = nuevo;
 }
 
-int Stack::pop()
+template <class T>
+T Stack<T>::pop()
 {
     if (top == nullptr) // Pila vacia
-        return 0;
+        throw "Underflow error...";
 
-    auto aux = top;
+    struct Stack::nodo *aux = top;
 
     top = top->prev;
-    int val = aux->dato;
+    T val = aux->dato;
     delete aux;
 
     return val;
 }
 
-Stack::~Stack()
+template <class T>
+void Stack<T>::clear()
 {
-    auto *temp = top;
+    struct nodo *aux = top;
+
+    while (top != nullptr)
+    {
+        aux = top;
+        top = top->prev;
+        delete aux;
+    }
+}
+
+template <class T>
+Stack<T>::~Stack()
+{
+    struct nodo *temp = top;
 
     while (top != nullptr)
     {
