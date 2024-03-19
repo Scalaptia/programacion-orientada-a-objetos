@@ -51,7 +51,7 @@ void Persona::SetNombre(const string nuevo_nombre)
     nombre = nuevo_nombre;
 }
 
-ostream &operator<<(ostream &os, Persona &persona)
+std::ostream &operator<<(std::ostream &os, const Persona &persona)
 {
     os << "Persona[" << persona.GetNombre() << ", " << persona.GetEdad() << "]";
     return os;

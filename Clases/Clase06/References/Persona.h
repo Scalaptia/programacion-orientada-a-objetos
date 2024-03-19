@@ -34,4 +34,4 @@ public:
     int GetEdad() const { return edad; };
 };
 
-ostream &operator<<(ostream &os, const Persona &persona);
+std::ostream &operator<<(std::ostream &os, const Persona &persona);
