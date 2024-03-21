@@ -4,6 +4,9 @@
 #include <queue>
 #include <deque>
 #include <vector>
+#include <list>
+#include <forward_list>
+#include <map>
 #include "./References/Persona.h"
 #include "./References/Estudiante.h"
 
@@ -270,7 +273,201 @@ void VectorTest()
         cout << (*it) << " "; // El operador * es para acceder al valor al que apunta el iterador
         it++;
     }
+    cout << endl
+         << endl;
+
+    // Otra forma de recorrer el vector
+    v = {2, 3, 4, 5, 8, 10, 20, 99};
+
+    cout << "Nuevo tamaño del vector: " << v.size() << endl;
+    cout << "Elementos del vector: " << endl;
+
+    for (it = v.begin(); it != v.end(); it++)
+        cout << (*it) << " ";
+
+    cout << endl
+         << endl;
+
+    // Se puede eliminar o insertar elementos en cualquier posicion del vector, utilizando iteradores
+    int x;
+    cout << "Dame un numero para insertar en el vector: ";
+    cin >> x;
+
+    // Recorrer
+    it = v.begin();
+    while (it != v.end() && (*it) < x)
+        it++;
+
+    // Insertar
+    v.insert(it, x);
+    cout << "Vector actualizado: ";
+    for (int n : v)
+        cout << n << " ";
+
     cout << endl;
+
+    // Eliminar un elemento del vector
+    cout << "Dame un numero para eliminar del vector: ";
+    cin >> x;
+
+    it = v.begin();
+    while (it != v.end() && (*it) != x)
+        it++;
+
+    if (it != v.end())
+    {
+        v.erase(it);
+        cout << "Vector actualizado: ";
+        for (int n : v)
+            cout << n << " ";
+
+        cout << endl;
+    }
+    else
+    {
+        cout << "El valor " << x << " no se encuentra en el vector...";
+    }
+}
+
+ostream &operator<<(ostream &out, list<int> &lista)
+{
+    out << "[";
+    for (auto it = lista.begin(); it != lista.end(); it++)
+        out << (*it) << " ";
+    out << "]";
+
+    return out;
+}
+
+void ListTest()
+{
+    list<int> lista = {7, 3, 8, 1, 99, 2, 666, 20, 80, 3};
+
+    lista.push_back(45);
+    lista.push_front(300);
+
+    cout << "Numero de elementos en la lista: " << lista.size() << endl;
+    cout << "Lista: " << lista << endl;
+
+    // Ordenar la lista
+    lista.sort();
+    cout << "Lista ordenada: " << lista << endl;
+
+    auto it = lista.begin();
+    it++;
+    it++;
+    it++;
+    cout << "Elemento en la posicion 3: " << (*it) << endl;
+
+    // La lista está doblemente enlazada
+    it--;
+    it--;
+    cout << "Elemento en la posicion 1: " << (*it) << endl;
+
+    // Se puede insertar elementos y eliminarlos utilizando el iterador
+    lista.insert(it, 456);
+    it++;
+    it++;
+    it = lista.erase(it); // Elimina el elemento en la posicion 3 y devuelve un iterador al siguiente elemento
+    cout << "Lista actualizada (erase):" << lista << endl;
+
+    // Eliminar un rango de elementos con dos iteradores
+    auto it2 = it;
+    it2++;
+    it2++;
+    it2++;
+    lista.erase(it, it2);
+    cout << "Lista actualizada (erase rango):" << lista << endl;
+}
+
+ostream &operator<<(ostream &out, forward_list<int> &lista)
+{
+    out << "[";
+    for (auto it = lista.begin(); it != lista.end(); it++)
+        out << (*it) << " ";
+    out << "]";
+
+    return out;
+}
+
+void ListTest2()
+{
+    forward_list<int> lista = {3, 5, 8, 15, 21, 66, 99, 666};
+
+    lista.push_front(1);
+    cout << "Lista: " << lista << endl;
+
+    auto it = lista.begin();
+    it++;
+    it++;
+    it++;
+    // Insertar un elemento en la posicion 3
+    lista.insert_after(it, 7);
+    cout << "Nueva lista: " << lista << endl;
+
+    lista.sort();
+    cout << "Lista ordenada: " << lista << endl;
+
+    it++;
+    lista.erase_after(it);
+    cout << "Lista actualizada (eliminar): " << lista << endl;
+}
+
+void MapTest()
+{
+    map<string, int> inventario;
+
+    inventario["libreta"] = 10;
+    inventario["lapiz"] = 20;
+    inventario["borrador"] = 5;
+    inventario["borrador"] = 5;
+    inventario["sacapuntas"] = 666;
+
+    // Otra forma de agregar elementos al mapa, con este metodo si el elemento ya existe, no se actualiza ni se agrega
+    inventario.insert({"ligas", 100});
+    inventario.insert({"ligas", 10});
+    // Con este metodo, si la llave ya existe, se actualiza el valor
+    inventario["lapiz"] = 50;
+
+    // En el mapa existe un campo llave y un campo valor
+    cout << "Elementos del mapa: " << endl;
+    auto it = inventario.begin();
+    while (it != inventario.end())
+    {
+        cout << (*it).first << " -> " << (*it).second << endl;
+        it++;
+    }
+
+    string producto;
+    int cantidad;
+
+    cout << "Que producto quieres comprar?: ";
+    getline(cin, producto);
+    cout << "Cuantos quieres comprar?: ";
+    cin >> cantidad;
+
+    // Si accedemos a un elemento que no existe, se crea con el valor por defecto
+    // inventario[producto] -= cantidad;
+
+    // Para verificar si un elemento existe en el mapa, se puede utilizar el metodo find
+    it = inventario.find(producto);
+    if (it != inventario.end())
+    {
+        // inventario[producto] -= cantidad;
+        if ((*it).second >= cantidad)
+            (*it).second -= cantidad; // Evitamos buscar el elemento dos veces
+        else
+            cout << "No hay suficiente cantidad de \"" << producto << "\"..." << endl;
+    }
+    else
+    {
+        cout << "No contamos con el producto \"" << producto << "\"..." << endl;
+    }
+
+    cout << endl
+         << "Mapa actualizado" << endl;
+    for (auto &p : inventario)
+        cout << p.first << " -> " << p.second << endl;
 }
 
 int main()
@@ -282,7 +479,10 @@ int main()
     // QueueTest2();
     // PQueueTest();
     // PQueueTest2();
-    VectorTest();
+    // VectorTest();
+    // ListTest();
+    // ListTest2();
+    MapTest();
 
     return 0;
 }
